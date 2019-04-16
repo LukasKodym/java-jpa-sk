@@ -9,7 +9,5 @@ public class H2Config {
         Connection connection = null;
 
         return connection;
-
     }
-
 }
