@@ -1,4 +1,4 @@
-package pl.lukas.jpa;
+package pl.lukas.sandbox;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

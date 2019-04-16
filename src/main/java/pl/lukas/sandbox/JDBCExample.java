@@ -1,4 +1,4 @@
-package pl.lukas.jpa;
+package pl.lukas.sandbox;
 
 import pl.lukas.jpa.domain.Student;
 import java.sql.Connection;
