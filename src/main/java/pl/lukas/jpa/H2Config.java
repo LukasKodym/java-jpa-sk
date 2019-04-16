@@ -11,13 +11,7 @@ public class H2Config {
     private static String user = "";
     private static String password = "";
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        Connection conn = getDBConection();
-
-        if (conn!=null) System.out.println("SUCCESS!");
-    }
-
-    private static Connection getDBConection() throws ClassNotFoundException, SQLException {
+    public static Connection getDBConnection() throws ClassNotFoundException, SQLException {
 
         Connection connection = null;
 
