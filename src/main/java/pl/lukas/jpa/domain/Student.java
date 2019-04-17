@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Student {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String telephone;
@@ -27,12 +28,10 @@ public class Student {
     public Student() {
     }
 
-    public Student(int id, String name) {
+    public Student(String name) {
         this.id = id;
         this.name = name;
     }
-
-
 
     public int getId() {
         return id;

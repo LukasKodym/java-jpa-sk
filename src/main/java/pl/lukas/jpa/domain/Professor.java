@@ -1,13 +1,12 @@
 package pl.lukas.jpa.domain;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Professor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
@@ -19,8 +18,7 @@ public class Professor {
     public Professor() {
     }
 
-    public Professor(int id, String name) {
-        this.id = id;
+    public Professor(String name) {
         this.name = name;
     }
 

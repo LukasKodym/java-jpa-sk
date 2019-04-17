@@ -18,8 +18,8 @@ public class JPAApp {
 
         entityManager.getTransaction().begin();
 
-        Student paweł = entityManager.merge(new Student(0, "Paweł"));
-        Indeks indeks = entityManager.merge(new Indeks(0, "132456"));
+        Student paweł = entityManager.merge(new Student( "Paweł"));
+        Indeks indeks = entityManager.merge(new Indeks( "132456"));
         System.out.println(paweł);
         paweł.setIndeks(indeks);
 
@@ -30,7 +30,7 @@ public class JPAApp {
 
         System.out.println(paweł);
 
-        Indeks idx = entityManager.find(Indeks.class, 0);
+        Indeks idx = entityManager.find(Indeks.class, indeks.getId());
         System.out.println(idx);
 
 
@@ -46,7 +46,7 @@ public class JPAApp {
     }
 
     private static void updateStudent() {
-        Student kinga = new Student(1,"Kinga");
+        Student kinga = new Student("Kinga");
 
         entityManager.getTransaction().begin();
         Student student = entityManager.merge(kinga);
@@ -58,14 +58,14 @@ public class JPAApp {
     }
 
     private static void readStudents() {
-        Student student = entityManager.find(Student.class, 0);
+        Student student = entityManager.find(Student.class, 1);
         System.out.println(student);
         List fromStudent = entityManager.createQuery("from Student").getResultList();
         fromStudent.forEach(System.out::println);
     }
 
     private static void createStudent() {
-        Student pawel = new Student(0,"Paweł");
+        Student pawel = new Student("Paweł");
         entityManager.getTransaction().begin();
         entityManager.persist(pawel);
         entityManager.getTransaction().commit();

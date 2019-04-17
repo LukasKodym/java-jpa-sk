@@ -12,8 +12,8 @@ public class JDBCExample {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         createTableForStudent();
-        Student student1 = new Student(1, "Paweł");
-        Student student2 = new Student(2, "Marek");
+        Student student1 = new Student("Paweł");
+        Student student2 = new Student( "Marek");
 
         insertStudent(student1);
         insertStudent(student2);
@@ -47,7 +47,7 @@ public class JDBCExample {
         while (resultSet.next()) {
             int id = resultSet.getInt("id");
             String name = resultSet.getString("name");
-            students.add(new Student(id, name));
+            students.add(new Student( name));
         }
         return students;
     }

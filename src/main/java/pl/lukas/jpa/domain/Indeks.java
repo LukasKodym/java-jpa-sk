@@ -1,14 +1,13 @@
 package pl.lukas.jpa.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Indeks {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String number;
 
@@ -18,8 +17,7 @@ public class Indeks {
     protected Indeks() {
     }
 
-    public Indeks(int id, String number) {
-        this.id = id;
+    public Indeks(String number) {
         this.number = number;
     }
 
