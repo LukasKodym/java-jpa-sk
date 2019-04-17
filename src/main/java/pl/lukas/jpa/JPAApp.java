@@ -27,9 +27,8 @@ public class JPAApp {
         Student kinga = new Student(1,"Kinga");
 
         entityManager.getTransaction().begin();
-        entityManager.persist(kinga);
+        Student student = entityManager.merge(kinga);
 
-        Student student = entityManager.find(Student.class, 1);
         student.setTelephone("125698418");
 
         entityManager.merge(student);
