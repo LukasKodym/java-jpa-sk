@@ -13,6 +13,16 @@ public class Student {
     @Embedded
     private Address address;
 
+    @OneToOne
+    private Indeks indeks;
+
+    public Indeks getIndeks() {
+        return indeks;
+    }
+
+    public void setIndeks(Indeks indeks) {
+        this.indeks = indeks;
+    }
 
     public Student() {
     }
@@ -21,6 +31,8 @@ public class Student {
         this.id = id;
         this.name = name;
     }
+
+
 
     public int getId() {
         return id;
@@ -48,9 +60,10 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id= " + id +
-                ", name= '" + name + '\'' +
+        return "Student{ " +
+                "id = " + id +
+                ", name = '" + name + '\'' +
+//                ", indeks = " + indeks +
                 '}';
     }
 }

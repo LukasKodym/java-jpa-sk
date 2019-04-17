@@ -1,5 +1,6 @@
 package pl.lukas.jpa;
 
+import pl.lukas.jpa.domain.Indeks;
 import pl.lukas.jpa.domain.Student;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,16 +16,25 @@ public class JPAApp {
 
     public static void main(String[] args) {
 
-        // CRUD
+        entityManager.getTransaction().begin();
 
-        // Create
-        createStudent();
-        // Read
-        readStudents();
-        // Update
-        updateStudent();
-        // Delete
-        deleteStudent();
+        Student paweł = entityManager.merge(new Student(0, "Paweł"));
+        Indeks indeks = entityManager.merge(new Indeks(0, "132456"));
+        System.out.println(paweł);
+        paweł.setIndeks(indeks);
+
+        paweł = entityManager.merge(paweł);
+        indeks.setOwner(paweł);
+        entityManager.merge(indeks);
+        entityManager.getTransaction().commit();
+
+        System.out.println(paweł);
+
+        Indeks idx = entityManager.find(Indeks.class, 0);
+        System.out.println(idx);
+
+
+
 
     }
 
