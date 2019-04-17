@@ -11,7 +11,6 @@ public class Student {
 
         private String telephone;
 
-
     public Student() {
     }
 

@@ -17,10 +17,22 @@ public class JPAApp {
 
         // CRUD
 
+        // Create
         createStudent();
+        // Read
         readStudents();
+        // Update
         updateStudent();
+        // Delete
+        deleteStudent();
 
+    }
+
+    private static void deleteStudent() {
+        Student student = entityManager.find(Student.class, 0);
+        entityManager.getTransaction().begin();
+        entityManager.remove(student);
+        entityManager.getTransaction().commit();
     }
 
     private static void updateStudent() {
