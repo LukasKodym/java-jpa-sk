@@ -1,9 +1,12 @@
 package pl.lukas.jpa.domain;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-public class Student {
+public class Professor {
+
 
     @Id
     private int id;
@@ -14,11 +17,10 @@ public class Student {
     @Embedded
     private Address address;
 
-
-    public Student() {
+    public Professor() {
     }
 
-    public Student(int id, String name) {
+    public Professor(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -55,3 +57,4 @@ public class Student {
                 '}';
     }
 }
+
