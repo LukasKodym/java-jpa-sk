@@ -19,6 +19,4 @@ public class Address {
         this.postalCode = postalCode;
         this.city = city;
     }
-
-
 }

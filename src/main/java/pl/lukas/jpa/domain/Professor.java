@@ -7,7 +7,6 @@ import javax.persistence.Id;
 @Entity
 public class Professor {
 
-
     @Id
     private int id;
     private String name;
@@ -57,4 +56,3 @@ public class Professor {
                 '}';
     }
 }
-
