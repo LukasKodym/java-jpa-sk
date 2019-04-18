@@ -1,5 +1,6 @@
 package pl.lukas.jpa;
 
+import pl.lukas.jpa.domain.Indeks;
 import pl.lukas.jpa.domain.Student;
 import pl.lukas.jpa.domain.University;
 
@@ -17,21 +18,26 @@ public class JPAApp {
 
     public static void main(String[] args) {
 
-        entityManager.getTransaction().begin();
+        createData();
 
-        Student paweł = entityManager.merge(new Student( "Paweł", "658942"));
-        University pp = entityManager.merge(new University("PP"));
+        entityManager.createQuery("from Student s where s.name like '%Jo%'").getResultList().forEach(System.out::println);
 
-        paweł.setUniversity(pp);
-        pp.addStudent(paweł);
-        entityManager.merge(paweł);
-        entityManager.merge(pp);
-
-        entityManager.getTransaction().commit();
-        University university = entityManager.find(University.class, pp.getId());
-        System.out.println(university);
+        List<Indeks> resultList = entityManager.createQuery("select s.indeks from Student s", Indeks.class)
+                .getResultList();
 
     }
+
+    private static void createData() {
+
+        entityManager.getTransaction().begin();
+
+        Student paweł = entityManager.merge(new Student("Paweł", "658942"));
+        Student john = entityManager.merge(new Student("John", "987456"));
+
+        entityManager.getTransaction().commit();
+
+    }
+
 
     private static void deleteStudent() {
         Student student = entityManager.find(Student.class, 0);
@@ -42,12 +48,9 @@ public class JPAApp {
 
     private static void updateStudent() {
         Student kinga = new Student("Kinga");
-
         entityManager.getTransaction().begin();
         Student student = entityManager.merge(kinga);
-
         student.setTelephone("125698418");
-
         entityManager.merge(student);
         entityManager.getTransaction().commit();
     }
