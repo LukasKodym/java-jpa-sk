@@ -13,7 +13,7 @@ public class University {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "university")
     private Set<Student> students;
 
     protected University() {
@@ -26,5 +26,18 @@ public class University {
 
     public void addStudent(Student student){
         students.add(student);
+    }
+
+    @Override
+    public String toString() {
+        return "University{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", students=" + students +
+                '}';
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

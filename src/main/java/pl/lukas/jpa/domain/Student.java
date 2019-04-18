@@ -2,6 +2,7 @@ package pl.lukas.jpa.domain;
 
 import javax.persistence.*;
 
+@Gett
 @Entity
 public class Student {
 
@@ -16,6 +17,9 @@ public class Student {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Indeks indeks;
+
+    @ManyToOne()
+    private University university;
 
     public Student(String name, String indeksNumber) {
         this.name = name;
@@ -69,5 +73,9 @@ public class Student {
                 ", name = '" + name + '\'' +
 //                ", indeks = " + indeks +
                 '}';
+    }
+
+    public void setUniversity(University university) {
+        this.university = university;
     }
 }

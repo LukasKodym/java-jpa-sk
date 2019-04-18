@@ -20,17 +20,16 @@ public class JPAApp {
         entityManager.getTransaction().begin();
 
         Student paweł = entityManager.merge(new Student( "Paweł", "658942"));
-        Student merge = entityManager.merge(paweł);
-        entityManager.getTransaction().commit();
-
-        System.out.println(paweł);
-        System.out.println(paweł.getIndeks());
-
-        entityManager.getTransaction().begin();
         University pp = entityManager.merge(new University("PP"));
-        pp.addStudent(paweł);
-        entityManager.getTransaction().commit();
 
+        paweł.setUniversity(pp);
+        pp.addStudent(paweł);
+        entityManager.merge(paweł);
+        entityManager.merge(pp);
+
+        entityManager.getTransaction().commit();
+        University university = entityManager.find(University.class, pp.getId());
+        System.out.println(university);
 
     }
 
