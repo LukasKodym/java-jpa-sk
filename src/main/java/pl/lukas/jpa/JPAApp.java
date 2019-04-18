@@ -7,6 +7,7 @@ import pl.lukas.jpa.domain.University;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class JPAApp {
@@ -22,9 +23,15 @@ public class JPAApp {
 
         entityManager.createQuery("from Student s where s.name like '%Jo%'").getResultList().forEach(System.out::println);
 
-        List<Indeks> resultList = entityManager.createQuery("select s.indeks from Student s", Indeks.class)
-                .getResultList();
+        TypedQuery<Indeks> query = entityManager
+                .createQuery("select s.indeks from Student s where s.name = ?1", Indeks.class);
+        TypedQuery<Indeks> query1 = entityManager
+                .createQuery("select s.indeks from Student s where s.name = :studentName", Indeks.class);
+        query.setParameter(1, "John");
+        query1.setParameter("studentName", "John");
 
+        System.out.println(query.getSingleResult());
+        System.out.println(query1.getSingleResult());
     }
 
     private static void createData() {
