@@ -1,6 +1,7 @@
 package pl.lukas.jpa;
 
 import pl.lukas.jpa.domain.Student;
+import pl.lukas.jpa.domain.University;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,23 +17,8 @@ public class JPAApp {
 
         createData();
 
-        TypedQuery<QueryResult> query = entityManager
-                .createQuery("select new pl.lukas.jpa.QueryResult(s.name, s.indeks.number) " +
-                        "from Student s where s.name in ('Paweł','John')", QueryResult.class);
+        entityManager.createQuery("from University").getResultList().forEach(System.out::println);
 
-//        query.getResultList().forEach(System.out::println);
-        List<CountResult> resultList = entityManager
-                .createQuery("select new pl.lukas.jpa.CountResult(s.name, count(s)) " +
-                        "from Student s group by s.name " +
-                        "having s.name like 'P%'", CountResult.class).getResultList();
-
-        resultList.forEach(System.out::println);
-
-        entityManager.createNamedQuery("Student.getAll", Student.class)
-                .getResultList().forEach(System.out::println);
-        entityManager.createNamedQuery("Student.byName", Student.class)
-                .setParameter("name", "John")
-                .getResultList().forEach(System.out::println);
 
     }
 
@@ -40,12 +26,16 @@ public class JPAApp {
 
         entityManager.getTransaction().begin();
 
-        entityManager.merge(new Student("Paweł", "658942"));
-        entityManager.merge(new Student("Paweł", "658953"));
-        entityManager.merge(new Student("Paweł", "658964"));
-        entityManager.merge(new Student("John", "987456"));
+        Student paweł = entityManager.merge(new Student("Paweł", "658942"));
+        Student john = entityManager.merge(new Student("John", "987456"));
+
+        University university = entityManager.merge(new University("UAM"));
+        university.addStudent(paweł);
+        university.addStudent(john);
+        entityManager.merge(university);
 
         entityManager.getTransaction().commit();
+        entityManager.clear();
 
     }
 

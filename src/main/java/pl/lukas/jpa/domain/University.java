@@ -13,7 +13,7 @@ public class University {
 
     private String name;
 
-    @OneToMany(mappedBy = "university")
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Student> students;
 
     protected University() {
