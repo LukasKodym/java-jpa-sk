@@ -18,14 +18,12 @@ public class JPAApp {
 
         createData();
 
-        Query query = entityManager
-                .createQuery("select s, s.indeks from Student s where s.name in ('Paweł','John')");
-        query.getResultList().forEach(o -> {
-            Object[] resultCasted = (Object[]) o;
-            if (resultCasted[0] instanceof Student){
-                System.out.println(resultCasted[0]);
-            }
-        });
+        TypedQuery<QueryResult> query = entityManager
+                .createQuery("select new pl.lukas.jpa.QueryResult(s.name, s.indeks.number) " +
+                        "from Student s where s.name in ('Paweł','John')", QueryResult.class);
+
+        query.getResultList().forEach(System.out::println);
+
     }
 
     private static void createData() {
