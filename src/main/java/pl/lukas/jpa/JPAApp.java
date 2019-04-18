@@ -18,22 +18,12 @@ public class JPAApp {
 
         entityManager.getTransaction().begin();
 
-        Student paweł = entityManager.merge(new Student( "Paweł"));
-        Indeks indeks = entityManager.merge(new Indeks( "132456"));
-        System.out.println(paweł);
-        paweł.setIndeks(indeks);
-
-        paweł = entityManager.merge(paweł);
-        indeks.setOwner(paweł);
-        entityManager.merge(indeks);
+        Student paweł = entityManager.merge(new Student( "Paweł", "658942"));
+        Student merge = entityManager.merge(paweł);
         entityManager.getTransaction().commit();
 
         System.out.println(paweł);
-
-        Indeks idx = entityManager.find(Indeks.class, indeks.getId());
-        System.out.println(idx);
-
-
+        System.out.println(paweł.getIndeks());
 
 
     }

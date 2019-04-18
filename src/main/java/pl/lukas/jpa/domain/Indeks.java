@@ -50,7 +50,7 @@ public class Indeks {
         return "Indeks{ " +
                 "id = " + id +
                 ", number = '" + number + '\'' +
-                ", owner = " + owner +
+//                ", owner = " + owner +
                 '}';
     }
 }

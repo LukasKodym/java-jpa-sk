@@ -14,8 +14,13 @@ public class Student {
     @Embedded
     private Address address;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Indeks indeks;
+
+    public Student(String name, String indeksNumber) {
+        this.name = name;
+        this.indeks = new Indeks(indeksNumber);
+    }
 
     public Indeks getIndeks() {
         return indeks;
