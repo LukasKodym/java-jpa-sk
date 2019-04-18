@@ -1,9 +1,6 @@
 package pl.lukas.jpa;
 
-import pl.lukas.jpa.domain.Indeks;
 import pl.lukas.jpa.domain.Student;
-import pl.lukas.jpa.domain.University;
-
 import javax.persistence.*;
 import java.util.List;
 
