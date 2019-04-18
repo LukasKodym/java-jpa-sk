@@ -4,10 +4,7 @@ import pl.lukas.jpa.domain.Indeks;
 import pl.lukas.jpa.domain.Student;
 import pl.lukas.jpa.domain.University;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
 
 public class JPAApp {
@@ -21,17 +18,14 @@ public class JPAApp {
 
         createData();
 
-        entityManager.createQuery("from Student s where s.name like '%Jo%'").getResultList().forEach(System.out::println);
-
-        TypedQuery<Indeks> query = entityManager
-                .createQuery("select s.indeks from Student s where s.name = ?1", Indeks.class);
-        TypedQuery<Indeks> query1 = entityManager
-                .createQuery("select s.indeks from Student s where s.name = :studentName", Indeks.class);
-        query.setParameter(1, "John");
-        query1.setParameter("studentName", "John");
-
-        System.out.println(query.getSingleResult());
-        System.out.println(query1.getSingleResult());
+        Query query = entityManager
+                .createQuery("select s, s.indeks from Student s where s.name in ('Paweł','John')");
+        query.getResultList().forEach(o -> {
+            Object[] resultCasted = (Object[]) o;
+            if (resultCasted[0] instanceof Student){
+                System.out.println(resultCasted[0]);
+            }
+        });
     }
 
     private static void createData() {
