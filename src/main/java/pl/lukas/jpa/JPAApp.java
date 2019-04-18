@@ -27,6 +27,13 @@ public class JPAApp {
                         "having s.name like 'P%'", CountResult.class).getResultList();
 
         resultList.forEach(System.out::println);
+
+        entityManager.createNamedQuery("Student.getAll", Student.class)
+                .getResultList().forEach(System.out::println);
+        entityManager.createNamedQuery("Student.byName", Student.class)
+                .setParameter("name", "John")
+                .getResultList().forEach(System.out::println);
+
     }
 
     private static void createData() {

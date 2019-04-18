@@ -6,6 +6,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries({
+@NamedQuery(name = "Student.getAll", query = "select s from Student s"),
+@NamedQuery(name = "Student.byName", query = "select s from Student s where s.name = :name")
+})
 @Entity
 @Getter
 public class Student {
